@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Junk Silver Buyback • Live Calculator</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+		body {
+			font-family: 'Inter', system-ui, sans-serif;
+		}
+
+		.live-dot {
+			animation: pulse 2s infinite;
+		}
+
+		@keyframes pulse {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.4;
+			}
+		}
+
+		.card-hover:hover {
+			transform: translateY(-4px);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+	</style>
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+	<div class="max-w-3xl mx-auto">
+		<!-- GitHub-style Header -->
+		<div class="bg-zinc-900 border-b border-zinc-800 py-4">
+			<div class="px-6 flex items-center justify-between">
+				<div class="flex items-center gap-3">
+					<div class="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center text-zinc-950 font-bold text-xl">🪙</div>
+					<div>
+						<h1 class="text-2xl font-semibold tracking-tight">Junk Silver Buyback</h1>
+						<p class="text-xs text-zinc-500">Live Spot + Dealer Rates • GitHub Pages</p>
+					</div>
+				</div>
+				<a href="https://github.com" target="_blank" class="text-zinc-400 hover:text-white flex items-center gap-2 text-sm">
+					<i class="fa-brands fa-github"></i>
+					<span>View on GitHub</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="p-6">
+			<!-- Status -->
+			<div class="flex items-center gap-2 text-sm mb-6 bg-emerald-950 border border-emerald-900 rounded-lg px-4 py-2.5">
+				<div class="w-2 h-2 bg-emerald-500 rounded-full live-dot"></div>
+				<span class="text-emerald-400 font-medium">Live Data • Spot & Dealer Rates</span>
+			</div>
+
+			<!-- Spot Price -->
+			<div class="bg-zinc-900 rounded-2xl p-6 mb-8 border border-zinc-800">
+				<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+					<div>
+						<p class="text-zinc-400 text-sm">Current Silver Spot Price</p>
+						<div id="spot-price" class="text-5xl font-mono font-bold text-emerald-400">$81.12</div>
+						<p id="spot-change" class="text-emerald-500 text-lg">+$2.34 (+2.97%)</p>
+					</div>
+					<div class="flex gap-3">
+						<button onclick="fetchAllData()" class="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-xl flex items-center gap-2 transition">
+							<i class="fa-solid fa-arrows-rotate"></i>
+							<span>Refresh Spot</span>
+						</button>
+					</div>
+				</div>
+				<p class="text-xs text-zinc-500 mt-4">Last updated: <span id="last-updated">just now</span></p>
+			</div>
+
+			<!-- Dealer Rates Status -->
+			<div class="flex items-center justify-between mb-4 px-1">
+				<p class="text-zinc-400 text-sm flex items-center gap-2">
+					<i class="fa-solid fa-store"></i>
+					Dealer Buyback Rates
+				</p>
+				<button onclick="updateDealerRates()" id="update-dealer-btn" class="px-5 py-2 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-semibold rounded-xl flex items-center gap-2 text-sm transition">
+					<i class="fa-solid fa-arrows-rotate"></i>
+					<span>Live Update Dealer Rates</span>
+				</button>
+			</div>
+
+			<!-- Face Value -->
+			<div class="bg-zinc-900 rounded-2xl p-6 mb-8 border border-zinc-800">
+				<label class="block text-sm text-zinc-400 mb-3">Your Junk Silver Face Value (USD)</label>
+				<input type="number" id
